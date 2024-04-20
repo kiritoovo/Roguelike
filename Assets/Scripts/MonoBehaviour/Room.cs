@@ -18,7 +18,6 @@ public class Room : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetupRoom(0,0,roomDataOS);
     }
 
     // Update is called once per frame
@@ -29,7 +28,7 @@ public class Room : MonoBehaviour
 
     private void OnMouseDown() {
         if(roomState == RoomState.gaind)
-        roomEvent.RaiseEvent(roomDataOS,this);
+        roomEvent.RaiseEvent(this,this);
     }
 
    public void SetupRoom(int colunm,int line,RoomDataOS roomDataOS)
@@ -39,5 +38,13 @@ public class Room : MonoBehaviour
         this.roomDataOS=roomDataOS;
 
         spriteRenderer.sprite=roomDataOS.roomIcon;
+
+        spriteRenderer.color= roomState switch
+        {
+            RoomState.Locked => new Color(0.5f, 0.5f, 0.5f, 1f),
+           RoomState.visited => new Color(0.5f, 0.8f, 0.5f, 0.5f),
+           RoomState.gaind => Color.white,
+            _ => throw new System.NotImplementedException(),
+        };
     }
 }

@@ -16,6 +16,7 @@ public class MapRoomData{
     public int colunm,line;
     public RoomDataOS roomDataOS;
     public RoomState roomState;
+    public List<Vector2Int> linkTo;
 }
 
 [Serializable]

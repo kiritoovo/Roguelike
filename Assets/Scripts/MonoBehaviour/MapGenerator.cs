@@ -168,7 +168,8 @@ public class MapGenerator : MonoBehaviour
                 colunm=rooms[i].colunm,
                 line=rooms[i].line,
                 roomDataOS=rooms[i].roomDataOS,
-                roomState=rooms[i].roomState
+                roomState=rooms[i].roomState,
+                linkTo=rooms[i].linkTo
             };
             mapLayoutOS.mapRoomDataList.Add(room);
             
@@ -191,7 +192,9 @@ public class MapGenerator : MonoBehaviour
             var newPosion=new Vector3(mapLayoutOS.mapRoomDataList[i].PosX,mapLayoutOS.mapRoomDataList[i].PosY);
             var newRoom=Instantiate(roomPrefab,newPosion,quaternion.identity,transform);
             newRoom.roomState=mapLayoutOS.mapRoomDataList[i].roomState;
+            
             newRoom.SetupRoom(mapLayoutOS.mapRoomDataList[i].colunm,mapLayoutOS.mapRoomDataList[i].line,mapLayoutOS.mapRoomDataList[i].roomDataOS);
+            newRoom.linkTo = mapLayoutOS.mapRoomDataList[i].linkTo;
             rooms.Add(newRoom);
         }
         for(int i=0;i<mapLayoutOS.linePositionList.Count;i++)

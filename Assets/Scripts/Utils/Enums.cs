@@ -8,3 +8,7 @@ public enum RoomType{
 public enum RoomState{
     Locked,visited,gaind
 }
+
+public enum CardType{
+    attack,denden,ability
+}

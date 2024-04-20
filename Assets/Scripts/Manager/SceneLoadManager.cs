@@ -7,16 +7,23 @@ public class SceneLoadManager : MonoBehaviour
 {
     AssetReference currentScene;
     public AssetReference map;
+    public ObjectEventSO updateRoomStateSo;
+    private Vector2Int currentRoomVector;
 
     public async void OnLoadRoomEvent(object roomType)
     {
-        if(roomType is RoomDataOS)
+        if(roomType is Room)
         {
-            var currentData=(RoomDataOS)roomType;
+            Room room = roomType as Room;
+            var currentData=room.roomDataOS;
+            currentRoomVector=new(room.colunm,room.line);
             currentScene=currentData.sceneToLoad;
         }
+        
+
         await UnloadSceneTask();
         await LoadSceneTask();
+        updateRoomStateSo.RaiseEvent(currentRoomVector,this);
     }
 
     private async Awaitable LoadSceneTask()
